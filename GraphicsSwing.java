@@ -24,33 +24,53 @@ class GraphicsSwing_0816 extends JPanel {
         BufferedImage buffer = new BufferedImage(601, 601,
                 BufferedImage.TYPE_INT_ARGB);
         Graphics2D g2 = buffer.createGraphics();
-        // System.out.println(g2);
-        g2.setColor(Color.WHITE);
+
+        g2.setColor(new Color(44, 53, 123));
         g2.fillRect(0, 0, 600, 600);
 
-        drawBackground(g2);
-        // drawBunny(g2);
-        // drawText(g2);
-        Color frame = new Color(43, 53, 134);
-        // Color area = new Color(255, 255, 255);
-        Color area = new Color(255, 255, 255);
-        g2.setColor(area);
+        // background
+        g2.setColor(Color.WHITE);
+        for (int i = 0; i < 600; i += 5) {
+            for (int j = 0; j < 600; j += 5) {
+                plotdot(g2, i, j, 2);
+            }
+        }
+
+        Color areaBunny = new Color(255, 255, 255);
+        Color frameBunny = new Color(31, 41, 111);
+        g2.setColor(areaBunny);
+        drawBunny(g2, 63, 0, 1);
+        buffer = FloodFill2(buffer, 64, 1, areaBunny, areaBunny); // body
+        buffer = FloodFill2(buffer, 87, 371, areaBunny, areaBunny); // left arm
+        buffer = FloodFill2(buffer, 199, 561, areaBunny, areaBunny); // left leg
+        buffer = FloodFill2(buffer, 592, 453, areaBunny, areaBunny); // tail
+        g2.setColor(frameBunny);
+        drawBunny(g2, 63, 0, 4);
+
+        Color frameText = new Color(43, 53, 134);
+        Color areaText = new Color(255, 255, 254);
+        g2.setColor(areaText);
         H(g2, 0, 0, 1);
         P(g2, 0, 0, 1);
         P(g2, 0, 0, 1);
         Y(g2, 0, 0, 1);
         N(g2, 122, 400, 1);
-        buffer = FloodFill2(buffer, 124, 402, area, area);
+        // buffer = FloodFill2(buffer, 124, 402, areaText, areaText);
+        buffer = FloodFillGradient(buffer, 123, 401, 124 + 67, 401 + 158, areaText, frameBunny, areaText);
         W(g2, 193, 400, 1);
-        buffer = FloodFill2(buffer, 195, 402, area, area);
+        buffer = FloodFillGradient(buffer, 194, 401, 194 + 106, 401 + 158, areaText, frameBunny, areaText);
+        // buffer = FloodFill2(buffer, 195, 402, areaText, areaText);
         J(g2, 294, 471, 1);
-        buffer = FloodFill2(buffer, 296, 473, area, area);
+        // buffer = FloodFill2(buffer, 296, 473, areaText, areaText);
+        buffer = FloodFillGradient(buffer, 294 + 23, 471 - 70, 294 + 52, 471 + 87, areaText, frameBunny, areaText);
         N(g2, 352, 400, 1);
-        buffer = FloodFill2(buffer, 354, 402, area, area);
+        // buffer = FloodFill2(buffer, 354, 402, areaText, areaText);
+        buffer = FloodFillGradient(buffer, 353, 401, 353 + 67, 401 + 158, areaText, frameBunny, areaText);
         S(g2, 422, 400, 1);
-        buffer = FloodFill2(buffer, 443, 420, area, area);
+        // buffer = FloodFill2(buffer, 443, 420, areaText, areaText);
+        buffer = FloodFillGradient(buffer, 423 + 30, 401, 423 + 69, 401 + 158, areaText, frameBunny, areaText);
 
-        g2.setColor(frame);
+        g2.setColor(frameText);
         drawText(g2, 3);
 
         g.drawImage(buffer, 0, 0, null);
@@ -152,80 +172,61 @@ class GraphicsSwing_0816 extends JPanel {
         // line(g, x + 67, y, x + 67, y + 158); // right
     }
 
-    private void drawBunny(Graphics g) {
+    private void drawBunny(Graphics g, int x, int y, int size) {
+        curve(g, new int[] { x, x - 30, x - 30, x }, new int[] { y, y + 30, y + 129, y + 159 }, size);
+        curve(g, new int[] { x, x - 33, x - 33, x }, new int[] { y + 159, y + 159, y + 224, y + 234 }, size);
+        curve(g, new int[] { x, x + 16, x + 87, x + 122 }, new int[] { y + 234, y + 262, y + 264, y + 295 }, size);
 
-    }
+        // left arm
+        curve(g, new int[] { x + 121, x + 45, x + 45, x - 31 }, new int[] { y + 296, y + 344, y + 344, y + 305 },
+                size);
+        curve(g, new int[] { x - 31, x - 45, x - 45, x - 63 }, new int[] { y + 305, y + 303, y + 303, y + 306 },
+                size);
+        curve(g, new int[] { x + 93, x + 21, x - 47, x - 63 }, new int[] { y + 434, y + 443, y + 421, y + 387 },
+                size);
 
-    private void drawBackground(Graphics g) {
-        // vertical-line
-        for (int i = 0; i < WIDTH; i += 11) {
-            g.setColor(Color.decode("#262e6c"));
-            line(g, i, 0, i, 600, 1);
+        curve(g, new int[] { x + 123, x + 82, x + 82, x + 91 }, new int[] { y + 294, y + 344, y + 408, y + 408 }, size);
+        curve(g, new int[] { x + 91, x + 91, x + 202, x + 257 }, new int[] { y + 390, y + 563, y + 563, y + 563 },
+                size);
+        curve(g, new int[] { x + 280, x + 252, x + 252, x + 256 }, new int[] { y + 537, y + 547, y + 600, y + 600 },
+                size);
 
-        }
-        // horizental-line
-        for (int i = 0; i < HEIGHT; i += 11) {
-            g.setColor(Color.decode("#262e6c"));
-            line(g, 0, i, 600, i, 1);
-        }
-        // inside-squre
-        String codeOutside = "#3c4581";
-        String codeInside = "#7a83bd";
-        for (int i = 0; i < WIDTH; i += 11) {
-            for (int j = 0; j < HEIGHT; j += 11) {
-                // left-top
-                g.setColor(Color.decode(codeOutside));
-                line(g, i + 1, j + 1, i + 5, j + 1, 1);
-                line(g, i + 1, j + 1, i + 1, j + 5, 1);
-                line(g, i + 5, j + 1, i + 5, j + 5, 1);
-                line(g, i + 1, j + 5, i + 5, j + 5, 1);
+        curve(g, new int[] { x + 471, x + 508, x + 508, x + 471 }, new int[] { y + 600, y + 550, y + 437, y + 419 },
+                size);
+        curve(g, new int[] { x + 471, x + 447, x + 372, x + 366 }, new int[] { y + 419, y + 397, y + 383, y + 344 },
+                size);
+        curve(g, new int[] { x + 347, x + 387, x + 447, x + 487 }, new int[] { y + 350, y + 336, y + 336, y + 354 },
+                size);
+        curve(g, new int[] { x + 487, x + 511, x + 537, x + 511 }, new int[] { y + 354, y + 373, y + 338, y + 323 },
+                size);
+        curve(g, new int[] { x + 517, x + 524, x + 531, x + 516 }, new int[] { y + 329, y + 337, y + 317, y + 305 },
+                size);
+        curve(g, new int[] { x + 524, x + 532, x + 537, x + 524 }, new int[] { y + 314, y + 322, y + 303, y + 287 },
+                size);
+        curve(g, new int[] { x + 524, x + 489, x + 341, x + 273 }, new int[] { y + 287, y + 238, y + 240, y + 259 },
+                size);
+        curve(g, new int[] { x + 273, x + 300, x + 427, x + 427 }, new int[] { y + 259, y + 250, y + 237, y + 109 },
+                size);
+        curve(g, new int[] { x + 427, x + 437, x + 440, x + 416 }, new int[] { y + 109, y + 117, y + 90, y + 63 },
+                size);
+        line(g, x + 416, y + 63, x + 423, y + 63, size);
+        curve(g, new int[] { x + 423, x + 403, x + 395, x + 392 }, new int[] { y + 63, y + 47, y + 32, y },
+                size);
 
-                g.setColor(Color.decode(codeInside));
-                line(g, i + 2, j + 2, i + 4, j + 2, 1);
-                line(g, i + 2, j + 2, i + 2, j + 4, 1);
-                line(g, i + 4, j + 2, i + 4, j + 4, 1);
-                line(g, i + 2, j + 4, i + 4, j + 4, 1);
+        // left leg
+        curve(g, new int[] { x + 134, x + 109, x + 109, x + 115 }, new int[] { y + 526, y + 536, y + 600, y + 600 },
+                size);
+        curve(g, new int[] { x + 257, x + 245, x + 239, x + 228 }, new int[] { y + 563, y + 592, y + 597, y + 600 },
+                size);
+        // left boot
+        curve(g, new int[] { x + 110, x + 56, x + 38, x + 35 }, new int[] { y + 569, y + 575, y + 586, y + 600 },
+                size);
 
-                // right-top
-                g.setColor(Color.decode(codeOutside));
-                line(g, i + 6, j + 1, i + 10, j + 1, 1);
-                line(g, i + 6, j + 1, i + 6, j + 5, 1);
-                line(g, i + 10, j + 1, i + 10, j + 5, 1);
-                line(g, i + 6, j + 5, i + 10, j + 5, 1);
-
-                g.setColor(Color.decode(codeInside));
-                line(g, i + 7, j + 2, i + 9, j + 2, 1);
-                line(g, i + 7, j + 2, i + 7, j + 4, 1);
-                line(g, i + 9, j + 2, i + 9, j + 4, 1);
-                line(g, i + 7, j + 4, i + 9, j + 4, 1);
-
-                // left-bottom
-                g.setColor(Color.decode(codeOutside));
-                line(g, i + 1, j + 6, i + 5, j + 6, 1);
-                line(g, i + 1, j + 6, i + 1, j + 10, 1);
-                line(g, i + 5, j + 6, i + 5, j + 10, 1);
-                line(g, i + 1, j + 10, i + 5, j + 10, 1);
-
-                g.setColor(Color.decode(codeInside));
-                line(g, i + 2, j + 7, i + 4, j + 7, 1);
-                line(g, i + 2, j + 7, i + 2, j + 9, 1);
-                line(g, i + 4, j + 7, i + 4, j + 9, 1);
-                line(g, i + 2, j + 9, i + 4, j + 9, 1);
-
-                // right-bottom
-                g.setColor(Color.decode(codeOutside));
-                line(g, i + 6, j + 6, i + 10, j + 6, 1);
-                line(g, i + 6, j + 6, i + 6, j + 10, 1);
-                line(g, i + 10, j + 6, i + 10, j + 10, 1);
-                line(g, i + 6, j + 10, i + 10, j + 10, 1);
-
-                g.setColor(Color.decode(codeInside));
-                line(g, i + 7, j + 7, i + 9, j + 7, 1);
-                line(g, i + 7, j + 7, i + 7, j + 9, 1);
-                line(g, i + 9, j + 7, i + 9, j + 9, 1);
-                line(g, i + 7, j + 9, i + 9, j + 9, 1);
-            }
-        }
+        // tail
+        curve(g, new int[] { x + 496, x + 517, x + 529, x + 537 }, new int[] { y + 529, y + 536, y + 536, y + 530 },
+                size);
+        curve(g, new int[] { x + 482, x + 497, x + 521, x + 537 }, new int[] { y + 429, y + 404, y + 392, y + 413 },
+                size);
 
     }
 
@@ -344,10 +345,6 @@ class GraphicsSwing_0816 extends JPanel {
             Point p = q.poll();
             // s
             if (p.y < 600 && m.getRGB(p.x, p.y + 1) != targetColour.getRGB()) {
-                // System.out
-                // .println(p.x + " " + (p.y + 1) + " " + m.getRGB(p.x, p.y) + " " +
-                // targetColour.getRGB() + " "
-                // + q.size());
                 g2.setColor(replacementColor);
                 plotdot(g2, p.x, p.y + 1, 1);
                 q.add(new Point(p.x, p.y + 1));
@@ -373,4 +370,80 @@ class GraphicsSwing_0816 extends JPanel {
         }
         return m;
     }
+
+    private BufferedImage FloodFillGradient(BufferedImage m, int xStart, int yStart, int xEnd, int yEnd,
+            Color startColor, Color endColor, Color target) {
+        Graphics2D g2 = m.createGraphics();
+        Queue<Point> q = new LinkedList<>();
+
+        float ratio = (float) (yStart - yStart) / (yEnd - yStart - 1);
+
+        Color lineColor = interpolateColor(startColor, endColor, ratio);
+        Color lineColor1 = interpolateColor(startColor, endColor, ratio);
+        Color lineColor2 = interpolateColor(startColor, endColor, ratio);
+
+        if (m.getRGB(xStart, yStart) != target.getRGB()) {
+            g2.setColor(lineColor);
+            plotdot(g2, xStart, yStart, 1);
+            q.add(new Point(xStart, yStart));
+        }
+
+        while (!q.isEmpty()) {
+            Point p = q.poll();
+
+            ratio = (float) (p.y - yStart) / (yEnd - yStart - 1);
+            lineColor = interpolateColor(startColor, endColor, ratio);
+
+            ratio = (float) (p.y - yStart - 1) / (yEnd - yStart - 1);
+            lineColor1 = interpolateColor(startColor, endColor, ratio);
+
+            ratio = (float) (p.y - yStart + 1) / (yEnd - yStart - 1);
+            lineColor2 = interpolateColor(startColor, endColor, ratio);
+
+            // s
+            if (p.y + 1 < 600 && (m.getRGB(p.x, p.y + 1) != target.getRGB())) {
+                if (m.getRGB(p.x, p.y + 1) != lineColor2.getRGB()) {
+                    g2.setColor(lineColor2);
+                    plotdot(g2, p.x, p.y + 1, 1);
+                    q.add(new Point(p.x, p.y + 1));
+                }
+            }
+            // n
+            if (p.y - 1 > 0 && (m.getRGB(p.x, p.y - 1) != target.getRGB())) {
+                if (m.getRGB(p.x, p.y - 1) != lineColor1.getRGB()) {
+                    g2.setColor(lineColor1);
+                    plotdot(g2, p.x, p.y - 1, 1);
+                    q.add(new Point(p.x, p.y - 1));
+                }
+            }
+            // e
+            if (p.x + 1 < 600 && (m.getRGB(p.x + 1, p.y) != target.getRGB())) {
+                if (m.getRGB(p.x + 1, p.y) != lineColor.getRGB()) {
+                    g2.setColor(lineColor);
+                    plotdot(g2, p.x + 1, p.y, 1);
+                    q.add(new Point(p.x + 1, p.y));
+                }
+            }
+            // w
+            if (p.x - 1 > 0 && (m.getRGB(p.x - 1, p.y) != target.getRGB())) {
+                if (m.getRGB(p.x - 1, p.y) != lineColor.getRGB()) {
+                    g2.setColor(lineColor);
+                    plotdot(g2, p.x - 1, p.y, 1);
+                    q.add(new Point(p.x - 1, p.y));
+                }
+            }
+
+        }
+        return m;
+    }
+
+    private Color interpolateColor(Color startColor, Color endColor, float ratio) {
+        int red = Math.max(0, Math.min(255, (int) (startColor.getRed() * (1 - ratio) + endColor.getRed() * ratio)));
+        int green = Math.max(0,
+                Math.min(255, (int) (startColor.getGreen() * (1 - ratio) + endColor.getGreen() * ratio)));
+        int blue = Math.max(0, Math.min(255, (int) (startColor.getBlue() * (1 - ratio) + endColor.getBlue() * ratio)));
+
+        return new Color(red, green, blue);
+    }
+
 }
