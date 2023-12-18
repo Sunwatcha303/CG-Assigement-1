@@ -25,10 +25,15 @@ class GraphicsSwing_0816 extends JPanel {
                 BufferedImage.TYPE_INT_ARGB);
         Graphics2D g2 = buffer.createGraphics();
 
-        g2.setColor(new Color(44, 53, 123));
-        g2.fillRect(0, 0, 600, 600);
-
         // background
+        Color bg = new Color(44, 53, 123);
+        g2.setColor(bg);
+        line(g2, 0, 0, 0, 600, 1);
+        line(g2, 0, 0, 600, 0, 1);
+        line(g2, 0, 600, 600, 600, 1);
+        line(g2, 600, 0, 600, 600, 1);
+        buffer = FloodFill2(buffer, 1, 1, bg, bg);
+
         g2.setColor(Color.WHITE);
         for (int i = 0; i < 600; i += 5) {
             for (int j = 0; j < 600; j += 5) {
@@ -36,56 +41,43 @@ class GraphicsSwing_0816 extends JPanel {
             }
         }
 
+        // bunny
         Color areaBunny = new Color(255, 255, 255);
         Color frameBunny = new Color(31, 41, 111);
-        g2.setColor(areaBunny);
-        drawBunny(g2, 63, 0, 1);
-        buffer = FloodFill2(buffer, 64, 1, areaBunny, areaBunny); // body
-        buffer = FloodFill2(buffer, 87, 371, areaBunny, areaBunny); // left arm
-        buffer = FloodFill2(buffer, 199, 561, areaBunny, areaBunny); // left leg
-        buffer = FloodFill2(buffer, 592, 453, areaBunny, areaBunny); // tail
         g2.setColor(frameBunny);
         drawBunny(g2, 63, 0, 4);
+        buffer = FloodFill2(buffer, 70, 5, frameBunny, areaBunny); // body
+        buffer = FloodFill2(buffer, 87, 371, frameBunny, areaBunny); // left arm
+        buffer = FloodFill2(buffer, 199, 561, frameBunny, areaBunny); // left leg
+        buffer = FloodFill2(buffer, 142, 593, frameBunny, areaBunny); // left boot
+        buffer = FloodFill2(buffer, 592, 453, frameBunny, areaBunny); // tail
+        buffer = FloodFill2(buffer, 259, 96, frameBunny, areaBunny); // right eye
+        buffer = FloodFill2(buffer, 243, 116, frameBunny, frameBunny); // right eye
+        buffer = FloodFill2(buffer, 112, 134, frameBunny, areaBunny); // left eye
+        buffer = FloodFill2(buffer, 96, 151, frameBunny, frameBunny); // left eye
+        buffer = FloodFill2(buffer, 59, 133, frameBunny, areaBunny); // left eye
+        buffer = FloodFill2(buffer, 62, 148, frameBunny, areaBunny); // left eye
 
+        // text
         Color frameText = new Color(43, 53, 134);
         Color areaText = new Color(255, 255, 254);
-        g2.setColor(areaText);
+        g2.setColor(frameText);
         H(g2, 0, 0, 1);
         P(g2, 0, 0, 1);
         P(g2, 0, 0, 1);
         Y(g2, 0, 0, 1);
-        N(g2, 122, 400, 1);
-        // buffer = FloodFill2(buffer, 124, 402, areaText, areaText);
-        buffer = FloodFillGradient(buffer, 123, 401, 124 + 67, 401 + 158, areaText, frameBunny, areaText);
-        W(g2, 193, 400, 1);
-        buffer = FloodFillGradient(buffer, 194, 401, 194 + 106, 401 + 158, areaText, frameBunny, areaText);
-        // buffer = FloodFill2(buffer, 195, 402, areaText, areaText);
-        J(g2, 294, 471, 1);
-        // buffer = FloodFill2(buffer, 296, 473, areaText, areaText);
-        buffer = FloodFillGradient(buffer, 294 + 23, 471 - 70, 294 + 52, 471 + 87, areaText, frameBunny, areaText);
-        N(g2, 352, 400, 1);
-        // buffer = FloodFill2(buffer, 354, 402, areaText, areaText);
-        buffer = FloodFillGradient(buffer, 353, 401, 353 + 67, 401 + 158, areaText, frameBunny, areaText);
-        S(g2, 422, 400, 1);
-        // buffer = FloodFill2(buffer, 443, 420, areaText, areaText);
-        buffer = FloodFillGradient(buffer, 423 + 30, 401, 423 + 69, 401 + 158, areaText, frameBunny, areaText);
-
-        g2.setColor(frameText);
-        drawText(g2, 3);
+        N(g2, 122, 400, 3);
+        buffer = FloodFillGradient(buffer, 125, 405, 124 + 67, 401 + 158, areaText, frameText, frameText);
+        W(g2, 193, 400, 3);
+        buffer = FloodFillGradient(buffer, 197, 405, 194 + 106, 401 + 158, areaText, frameText, frameText);
+        J(g2, 294, 471, 3);
+        buffer = FloodFillGradient(buffer, 294 + 33, 471 - 66, 294 + 52, 471 + 87, areaText, frameText, frameText);
+        N(g2, 352, 400, 3);
+        buffer = FloodFillGradient(buffer, 356, 405, 353 + 67, 401 + 158, areaText, frameText, frameText);
+        S(g2, 422, 400, 3);
+        buffer = FloodFillGradient(buffer, 423 + 35, 405, 423 + 69, 401 + 158, areaText, frameText, frameText);
 
         g.drawImage(buffer, 0, 0, null);
-    }
-
-    private void drawText(Graphics g, int size) {
-        H(g, 0, 0, size);
-        P(g, 0, 0, size);
-        P(g, 0, 0, size);
-        Y(g, 0, 0, size);
-        N(g, 122, 400, size);
-        W(g, 193, 400, size);
-        J(g, 294, 471, size);
-        N(g, 352, 400, size);
-        S(g, 422, 400, size);
     }
 
     private void Y(Graphics g, int i, int j, int size) {
@@ -219,13 +211,91 @@ class GraphicsSwing_0816 extends JPanel {
         curve(g, new int[] { x + 257, x + 245, x + 239, x + 228 }, new int[] { y + 563, y + 592, y + 597, y + 600 },
                 size);
         // left boot
-        curve(g, new int[] { x + 110, x + 56, x + 38, x + 35 }, new int[] { y + 569, y + 575, y + 586, y + 600 },
+        curve(g, new int[] { x + 113, x + 56, x + 38, x + 35 }, new int[] { y + 569, y + 575, y + 586, y + 600 },
                 size);
 
         // tail
         curve(g, new int[] { x + 496, x + 517, x + 529, x + 537 }, new int[] { y + 529, y + 536, y + 536, y + 530 },
                 size);
         curve(g, new int[] { x + 482, x + 497, x + 521, x + 537 }, new int[] { y + 429, y + 404, y + 392, y + 413 },
+                size);
+
+        // nose
+        curve(g, new int[] { x + 110, x + 29, x + 29, x + 84 }, new int[] { y + 137, y + 122, y + 223, y + 193 }, size);
+        curve(g, new int[] { x + 84, x + 121, x + 150, x + 155 }, new int[] { y + 193, y + 205, y + 194, y + 180 },
+                size);
+        curve(g, new int[] { x + 133, x + 136, x + 190, x + 188 }, new int[] { y + 164, y + 183, y + 188, y + 182 },
+                size);
+        curve(g, new int[] { x + 74, x + 94, x + 116, x + 126 }, new int[] { y + 198, y + 225, y + 225, y + 197 },
+                size);
+        curve(g, new int[] { x + 97, x + 97, x + 63, x + 63 }, new int[] { y + 153, y + 147, y + 147, y + 165 },
+                size);
+        curve(g, new int[] { x + 97, x + 97, x + 66, x + 63 }, new int[] { y + 153, y + 147, y + 147, y + 165 },
+                size);
+        curve(g, new int[] { x + 63, x + 81, x + 97, x + 97 }, new int[] { y + 165, y + 196, y + 165, y + 153 },
+                size);
+
+        // left eye
+        curve(g, new int[] { x + 64, x + 49, x + 11, x + 1 }, new int[] { y + 143, y + 92, y + 92, y + 138 },
+                size);
+        curve(g, new int[] { x + 1, x + 1, x + 24, x + 45 }, new int[] { y + 138, y + 165, y + 165, y + 165 },
+                size);
+        curve(g, new int[] { x + 33, x + 46, x + 42, x + 36 }, new int[] { y + 105, y + 129, y + 135, y + 132 },
+                size);
+        curve(g, new int[] { x + 36, x + 48, x + 47, x + 55 }, new int[] { y + 132, y + 138, y + 142, y + 150 },
+                size);
+        curve(g, new int[] { x + 15, x + 16, x + 35, x + 20 }, new int[] { y + 130, y + 117, y + 123, y + 150 },
+                size);
+        curve(g, new int[] { x + 15, x + 9, x - 3, x + 20 }, new int[] { y + 130, y + 120, y + 133, y + 150 },
+                size);
+        line(g, x + 1, y + 130, x - 30, y + 117, size);
+        line(g, x + 3, y + 140, x - 21, y + 139, size);
+        curve(g, new int[] { x - 9, x - 24, x - 47, x - 47 }, new int[] { y + 198, y + 196, y + 198, y + 203 },
+                size);
+        curve(g, new int[] { x + 3, x - 22, x - 35, x - 38 }, new int[] { y + 216, y + 220, y + 232, y + 244 },
+                size);
+
+        // right eye
+        curve(g, new int[] { x + 143, x + 133, x + 212, x + 212 }, new int[] { y + 141, y + 57, y + 57, y + 114 },
+                size);
+        curve(g, new int[] { x + 212, x + 170, x + 148, x + 143 }, new int[] { y + 114, y + 136, y + 145, y + 141 },
+                size);
+        curve(g, new int[] { x + 169, x + 193, x + 193, x + 184 }, new int[] { y + 74, y + 95, y + 106, y + 104 },
+                size);
+        curve(g, new int[] { x + 184, x + 197, x + 197, x + 197 }, new int[] { y + 104, y + 109, y + 117, y + 122 },
+                size);
+        curve(g, new int[] { x + 159, x + 161, x + 171, x + 167 }, new int[] { y + 107, y + 88, y + 88, y + 125 },
+                size);
+        curve(g, new int[] { x + 159, x + 145, x + 137, x + 167 }, new int[] { y + 107, y + 95, y + 110, y + 125 },
+                size);
+        line(g, x + 203, y + 89, x + 222, y + 68, size);
+        line(g, x + 210, y + 100, x + 228, y + 86, size);
+        curve(g, new int[] { x + 206, x + 217, x + 249, x + 286 }, new int[] { y + 148, y + 126, y + 110, y + 107 },
+                size);
+        curve(g, new int[] { x + 217, x + 237, x + 259, x + 309 }, new int[] { y + 164, y + 142, y + 138, y + 142 },
+                size);
+
+        // left eyebrow
+        curve(g, new int[] { x + 7, x + 13, x + 31, x + 31 }, new int[] { y + 46, y + 35, y + 35, y + 41 },
+                size);
+        // right eyebrow
+        curve(g, new int[] { x + 148, x + 148, x + 181, x + 181 }, new int[] { y + 30, y + 11, y + 11, y + 19 },
+                size);
+
+        // chest hair
+        curve(g, new int[] { x + 111, x + 128, x + 157, x + 157 }, new int[] { y + 373, y + 407, y + 404, y + 397 },
+                size);
+        curve(g, new int[] { x + 143, x + 159, x + 189, x + 194 }, new int[] { y + 385, y + 405, y + 403, y + 396 },
+                size);
+        curve(g, new int[] { x + 194, x + 184, x + 177, x + 178 }, new int[] { y + 396, y + 393, y + 391, y + 386 },
+                size);
+        curve(g, new int[] { x + 178, x + 189, x + 203, x + 205 }, new int[] { y + 386, y + 390, y + 385, y + 379 },
+                size);
+
+        // line left hand
+        curve(g, new int[] { x - 37, x - 40, x - 34, x - 27 }, new int[] { y + 323, y + 339, y + 347, y + 346 },
+                size);
+        curve(g, new int[] { x - 63, x - 62, x - 58, x - 55 }, new int[] { y + 324, y + 329, y + 331, y + 328 },
                 size);
 
     }
@@ -345,27 +415,35 @@ class GraphicsSwing_0816 extends JPanel {
             Point p = q.poll();
             // s
             if (p.y < 600 && m.getRGB(p.x, p.y + 1) != targetColour.getRGB()) {
-                g2.setColor(replacementColor);
-                plotdot(g2, p.x, p.y + 1, 1);
-                q.add(new Point(p.x, p.y + 1));
+                if (m.getRGB(p.x, p.y + 1) != replacementColor.getRGB()) {
+                    g2.setColor(replacementColor);
+                    plotdot(g2, p.x, p.y + 1, 1);
+                    q.add(new Point(p.x, p.y + 1));
+                }
             }
             // n
             if (p.y > 0 && m.getRGB(p.x, p.y - 1) != targetColour.getRGB()) {
-                g2.setColor(replacementColor);
-                plotdot(g2, p.x, p.y - 1, 1);
-                q.add(new Point(p.x, p.y - 1));
+                if (m.getRGB(p.x, p.y - 1) != replacementColor.getRGB()) {
+                    g2.setColor(replacementColor);
+                    plotdot(g2, p.x, p.y - 1, 1);
+                    q.add(new Point(p.x, p.y - 1));
+                }
             }
             // e
             if (p.x < 600 && m.getRGB(p.x + 1, p.y) != targetColour.getRGB()) {
-                g2.setColor(replacementColor);
-                plotdot(g2, p.x + 1, p.y, 1);
-                q.add(new Point(p.x + 1, p.y));
+                if (m.getRGB(p.x + 1, p.y) != replacementColor.getRGB()) {
+                    g2.setColor(replacementColor);
+                    plotdot(g2, p.x + 1, p.y, 1);
+                    q.add(new Point(p.x + 1, p.y));
+                }
             }
             // w
             if (p.x > 0 && m.getRGB(p.x - 1, p.y) != targetColour.getRGB()) {
-                g2.setColor(replacementColor);
-                plotdot(g2, p.x - 1, p.y, 1);
-                q.add(new Point(p.x - 1, p.y));
+                if (m.getRGB(p.x - 1, p.y) != replacementColor.getRGB()) {
+                    g2.setColor(replacementColor);
+                    plotdot(g2, p.x - 1, p.y, 1);
+                    q.add(new Point(p.x - 1, p.y));
+                }
             }
         }
         return m;
