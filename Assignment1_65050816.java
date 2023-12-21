@@ -5,16 +5,16 @@ import java.util.Queue;
 
 import javax.swing.*;
 
-class GraphicsSwing_0816 extends JPanel {
+class Assignment1_65050816 extends JPanel {
         int WIDTH = 600;
         int HEIGHT = 600;
 
         public static void main(String[] args) {
-                GraphicsSwing_0816 m = new GraphicsSwing_0816();
+                Assignment1_65050816 m = new Assignment1_65050816();
 
                 JFrame f = new JFrame();
                 f.add(m);
-                f.setTitle("Happy New Jeans - 0816");
+                f.setTitle("Assignment1_Happy_New_Jeans_65050816");
                 f.setSize(m.WIDTH, m.HEIGHT);
                 f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
                 f.setVisible(true);
@@ -51,26 +51,21 @@ class GraphicsSwing_0816 extends JPanel {
                 Color frameText = new Color(43, 53, 134);
                 Color areaText = new Color(255, 255, 254);
                 g2.setColor(frameText);
-                H(g2, 0, 0, 1);
-                P(g2, 0, 0, 1);
-                P(g2, 0, 0, 1);
-                Y(g2, 0, 0, 1);
                 N(g2, 122, 400, 3);
-                buffer = floodFillGradient(buffer, 125, 405, 124 + 67, 401 + 158, areaText, frameText, frameText);
+                buffer = floodFillGradient(buffer, 125, 405, 191, 559, areaText, frameText, frameText);
                 W(g2, 193, 400, 3);
-                buffer = floodFillGradient(buffer, 197, 405, 194 + 106, 401 + 158, areaText, frameText, frameText);
+                buffer = floodFillGradient(buffer, 197, 405, 300, 559, areaText, frameText, frameText);
                 J(g2, 294, 471, 3);
-                buffer = floodFillGradient(buffer, 294 + 33, 471 - 66, 294 + 52, 471 + 87, areaText, frameText,
-                                frameText);
+                buffer = floodFillGradient(buffer, 327, 405, 346, 558, areaText, frameText, frameText);
                 N(g2, 352, 400, 3);
-                buffer = floodFillGradient(buffer, 356, 405, 353 + 67, 401 + 158, areaText, frameText, frameText);
+                buffer = floodFillGradient(buffer, 356, 405, 420, 559, areaText, frameText, frameText);
                 S(g2, 422, 400, 3);
-                buffer = floodFillGradient(buffer, 423 + 35, 405, 423 + 69, 401 + 158, areaText, frameText, frameText);
+                buffer = floodFillGradient(buffer, 423 + 35, 405, 492, 559, areaText, frameText, frameText);
 
-                // plot dot
+                // plot dot background
                 g2.setColor(Color.WHITE);
-                for (int i = 0; i < 600; i += 4) {
-                        for (int j = 0; j < 600; j += 4) {
+                for (int i = 0; i < HEIGHT; i += 4) {
+                        for (int j = 0; j < WIDTH; j += 4) {
                                 if (buffer.getRGB(i, j) == bg.getRGB()) {
                                         g2.setColor(Color.WHITE);
                                         plotdot(g2, i, j, 2);
@@ -84,17 +79,7 @@ class GraphicsSwing_0816 extends JPanel {
                 g.drawImage(buffer, 0, 0, null);
         }
 
-        private void Y(Graphics g, int i, int j, int size) {
-        }
-
-        private void P(Graphics g, int i, int j, int size) {
-        }
-
-        private void H(Graphics g, int i, int j, int size) {
-        }
-
         private void S(Graphics g, int x, int y, int size) {
-                // g.setColor(Color.WHITE);
                 line(g, x + 60, y + 48, x + 60, y + 33, size); // |
                 curve(g, new int[] { x + 60, x + 60, x, x }, new int[] { y + 33, y - 10, y - 10, y + 33 }, size);
                 curve(g, new int[] { x, x, x + 20, x + 20 }, new int[] { y + 32, y + 45, y + 63, y + 63 }, size);
@@ -112,29 +97,29 @@ class GraphicsSwing_0816 extends JPanel {
                 line(g, x + 40, y + 28, x + 40, y + 48, size); // |
                 line(g, x + 40, y + 48, x + 60, y + 48, size); // _
 
-                // line(g, x, y, x + 69, y); // top 491 - 422
+                // frame
+                // line(g, x, y, x + 69, y); // top
                 // line(g, x, y, x, y + 158); // left
                 // line(g, x, y + 158, x + 69, y + 158); // bottom
                 // line(g, x + 69, y, x + 69, y + 158); // right
         }
 
         private void J(Graphics g, int x, int y, int size) {
-                // g.setColor(Color.WHITE);
                 line(g, x + 22, y - 71, x + 22, y - 11, size);// |
                 curve(g, new int[] { x + 22, x + 22, x + 12, x }, new int[] { y - 11, y, y, y }, size);
                 line(g, x, y, x, y + 63, size);// |
                 curve(g, new int[] { x, x, x + 52, x + 52 }, new int[] { y + 63, y + 97, y + 97, y + 63 }, size);
                 line(g, x + 52, y + 63, x + 52, y - 71, size);// |
                 line(g, x + 52, y - 71, x + 22, y - 71, size);// _
-                // curve(g, new int[] { 100, 200, 300 }, new int[] { 100, 300, 100 }, 3);
-                // line(g, x, y - 71, x + 52, y - 71);// top y = 501-430 (71) x = 346-294 (52)
-                // line(g, x, y - 71, x, y + 87); // left 588 - 501 = 87
+
+                // frame
+                // line(g, x, y - 71, x + 52, y - 71);// top
+                // line(g, x, y - 71, x, y + 87); // left
                 // line(g, x, y + 87, x + 52, y + 87); // bottom
                 // line(g, x + 52, y - 71, x + 52, y + 87); // right
         }
 
         private void W(Graphics g, int x, int y, int size) {
-                // g.setColor(Color.WHITE);
                 line(g, x, y, x + 14, y + 158, size);// \
                 line(g, x + 14, y + 158, x + 47, y + 158, size);// _
                 line(g, x + 47, y + 158, x + 53, y + 118, size);// /
@@ -146,16 +131,17 @@ class GraphicsSwing_0816 extends JPanel {
                 line(g, x + 70, y + 40, x + 63, y, size);// \
                 line(g, x + 63, y, x + 43, y, size);// _
                 line(g, x + 43, y, x + 36, y + 40, size);// /
-                line(g, x + 36, y + 40, x + 30, y, size);// \ 236 - 223= 13
+                line(g, x + 36, y + 40, x + 30, y, size);// \
                 line(g, x + 30, y, x, y, size);// _
-                // line(g, x, y, x + 106, y);// top 299
+
+                // frame
+                // line(g, x, y, x + 106, y);// top
                 // line(g, x, y, x, y + 158); // left
                 // line(g, x, y + 158, x + 106, y + 158); // bottom
                 // line(g, x + 106, y, x + 106, y + 158); // right
         }
 
         private void N(Graphics g, int x, int y, int size) {
-                // g.setColor(Color.WHITE);
                 line(g, x, y, x, y + 158, size); // | 122 430 , 122 588
                 line(g, x, y + 158, x + 25, y + 158, size); // _ 122 588 , 122 + 25 588
                 line(g, x + 25, y + 158, x + 25, y + 118, size); // | 147 588 , 147 588 -40
@@ -166,6 +152,8 @@ class GraphicsSwing_0816 extends JPanel {
                 line(g, x + 42, y, x + 42, y + 40, size); // |
                 line(g, x + 42, y + 40, x + 30, y, size); // \
                 line(g, x + 30, y, x, y, size); // _
+
+                // frame
                 // line(g, x, y, x + 67, y); // top 189 67
                 // line(g, x, y, x, y + 158); // left 158
                 // line(g, x, y + 158, x + 67, y + 158); // bottom
@@ -173,6 +161,7 @@ class GraphicsSwing_0816 extends JPanel {
         }
 
         private void drawBunny(Graphics g, int x, int y, int size) {
+                // body
                 curve(g, new int[] { x, x - 30, x - 30, x }, new int[] { y, y + 30, y + 129, y + 159 }, size);
                 curve(g, new int[] { x, x - 33, x - 33, x }, new int[] { y + 159, y + 159, y + 224, y + 234 }, size);
                 curve(g, new int[] { x, x + 16, x + 87, x + 122 }, new int[] { y + 234, y + 262, y + 264, y + 295 },
@@ -187,6 +176,7 @@ class GraphicsSwing_0816 extends JPanel {
                 curve(g, new int[] { x + 93, x + 21, x - 47, x - 63 }, new int[] { y + 434, y + 443, y + 421, y + 387 },
                                 size);
 
+                // body cont.
                 curve(g, new int[] { x + 123, x + 82, x + 82, x + 91 },
                                 new int[] { y + 294, y + 344, y + 408, y + 408 }, size);
                 curve(g, new int[] { x + 91, x + 91, x + 202, x + 257 },
@@ -385,7 +375,7 @@ class GraphicsSwing_0816 extends JPanel {
                 }
         }
 
-        private void polygon(Graphics g, int[] x, int[] y, int n) {
+        private void polygon(Graphics g, int[] x, int[] y, int n, int size) {
                 g.drawPolygon(new Polygon(x, y, n));
         }
 
@@ -455,7 +445,6 @@ class GraphicsSwing_0816 extends JPanel {
                         // s
                         if (p.y < 600 && m.getRGB(p.x, p.y + 1) != targetColour.getRGB()) {
                                 if (m.getRGB(p.x, p.y + 1) != replacementColor.getRGB()) {
-                                        // g2.setColor(replacementColor);
                                         plotdot(g2, p.x, p.y + 1, 1);
                                         q.add(new Point(p.x, p.y + 1));
                                 }
@@ -463,7 +452,6 @@ class GraphicsSwing_0816 extends JPanel {
                         // n
                         if (p.y > 0 && m.getRGB(p.x, p.y - 1) != targetColour.getRGB()) {
                                 if (m.getRGB(p.x, p.y - 1) != replacementColor.getRGB()) {
-                                        // g2.setColor(replacementColor);
                                         plotdot(g2, p.x, p.y - 1, 1);
                                         q.add(new Point(p.x, p.y - 1));
                                 }
@@ -471,7 +459,6 @@ class GraphicsSwing_0816 extends JPanel {
                         // e
                         if (p.x < 600 && m.getRGB(p.x + 1, p.y) != targetColour.getRGB()) {
                                 if (m.getRGB(p.x + 1, p.y) != replacementColor.getRGB()) {
-                                        // g2.setColor(replacementColor);
                                         plotdot(g2, p.x + 1, p.y, 1);
                                         q.add(new Point(p.x + 1, p.y));
                                 }
@@ -479,7 +466,6 @@ class GraphicsSwing_0816 extends JPanel {
                         // w
                         if (p.x > 0 && m.getRGB(p.x - 1, p.y) != targetColour.getRGB()) {
                                 if (m.getRGB(p.x - 1, p.y) != replacementColor.getRGB()) {
-                                        // g2.setColor(replacementColor);
                                         plotdot(g2, p.x - 1, p.y, 1);
                                         q.add(new Point(p.x - 1, p.y));
                                 }
@@ -511,9 +497,11 @@ class GraphicsSwing_0816 extends JPanel {
                         ratio = (float) (p.y - yStart) / (yEnd - yStart - 1);
                         lineColor = interpolateColor(startColor, endColor, ratio);
 
+                        // y-1
                         ratio = (float) (p.y - yStart - 1) / (yEnd - yStart - 1);
                         lineColor1 = interpolateColor(startColor, endColor, ratio);
 
+                        // y+1
                         ratio = (float) (p.y - yStart + 1) / (yEnd - yStart - 1);
                         lineColor2 = interpolateColor(startColor, endColor, ratio);
 
