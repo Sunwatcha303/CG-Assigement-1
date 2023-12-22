@@ -35,17 +35,17 @@ class Assignment1_65050816 extends JPanel {
                 Color frameBunny = new Color(31, 41, 111);
                 g2.setColor(frameBunny);
                 drawBunny(g2, 63, 0, 4);
-                buffer = floodFill2(buffer, 70, 5, frameBunny, areaBunny); // body
-                buffer = floodFill2(buffer, 87, 371, frameBunny, areaBunny); // left arm
-                buffer = floodFill2(buffer, 199, 561, frameBunny, areaBunny); // left leg
-                buffer = floodFill2(buffer, 142, 593, frameBunny, frameBunny); // left boot
-                buffer = floodFill2(buffer, 592, 453, frameBunny, areaBunny); // tail
-                buffer = floodFill2(buffer, 259, 96, frameBunny, areaBunny); // right eye
-                buffer = floodFill2(buffer, 243, 116, frameBunny, frameBunny); // right eye
-                buffer = floodFill2(buffer, 112, 134, frameBunny, areaBunny); // left eye
-                buffer = floodFill2(buffer, 96, 151, frameBunny, frameBunny); // left eye
-                buffer = floodFill2(buffer, 59, 133, frameBunny, areaBunny); // left eye
-                buffer = floodFill2(buffer, 62, 148, frameBunny, areaBunny); // left eye
+                buffer = floodFill(buffer, 70, 5, frameBunny, areaBunny); // body
+                buffer = floodFill(buffer, 87, 371, frameBunny, areaBunny); // left arm
+                buffer = floodFill(buffer, 199, 561, frameBunny, areaBunny); // left leg
+                buffer = floodFill(buffer, 142, 593, frameBunny, frameBunny); // left boot
+                buffer = floodFill(buffer, 592, 453, frameBunny, areaBunny); // tail
+                buffer = floodFill(buffer, 259, 96, frameBunny, areaBunny); // right eye
+                buffer = floodFill(buffer, 243, 116, frameBunny, frameBunny); // right eye
+                buffer = floodFill(buffer, 112, 134, frameBunny, areaBunny); // left eye
+                buffer = floodFill(buffer, 96, 151, frameBunny, frameBunny); // left eye
+                buffer = floodFill(buffer, 59, 133, frameBunny, areaBunny); // left eye
+                buffer = floodFill(buffer, 62, 148, frameBunny, areaBunny); // left eye
 
                 // text
                 Color frameText = new Color(43, 53, 134);
@@ -77,6 +77,7 @@ class Assignment1_65050816 extends JPanel {
                 }
 
                 g.drawImage(buffer, 0, 0, null);
+                // Ref. https://pin.it/3Z9b2Yl
         }
 
         private void S(Graphics g, int x, int y, int size) {
@@ -120,19 +121,10 @@ class Assignment1_65050816 extends JPanel {
         }
 
         private void W(Graphics g, int x, int y, int size) {
-                line(g, x, y, x + 14, y + 158, size);// \
-                line(g, x + 14, y + 158, x + 47, y + 158, size);// _
-                line(g, x + 47, y + 158, x + 53, y + 118, size);// /
-                line(g, x + 53, y + 118, x + 59, y + 158, size);// \
-                line(g, x + 59, y + 158, x + 92, y + 158, size);// _
-                line(g, x + 92, y + 158, x + 106, y, size);// /
-                line(g, x + 106, y, x + 76, y, size);// _
-                line(g, x + 76, y, x + 70, y + 40, size);// /
-                line(g, x + 70, y + 40, x + 63, y, size);// \
-                line(g, x + 63, y, x + 43, y, size);// _
-                line(g, x + 43, y, x + 36, y + 40, size);// /
-                line(g, x + 36, y + 40, x + 30, y, size);// \
-                line(g, x + 30, y, x, y, size);// _
+                int[] xp = { x, x + 14, x + 47, x + 53, x + 59, x + 92, x + 106, x + 76, x + 70, x + 63, x + 43, x + 36,
+                                x + 30, x };
+                int[] yp = { y, y + 158, y + 158, y + 118, y + 158, y + 158, y, y, y + 40, y, y, y + 40, y, y };
+                polygon(g, xp, yp, yp.length, size);
 
                 // frame
                 // line(g, x, y, x + 106, y);// top
@@ -142,16 +134,9 @@ class Assignment1_65050816 extends JPanel {
         }
 
         private void N(Graphics g, int x, int y, int size) {
-                line(g, x, y, x, y + 158, size); // | 122 430 , 122 588
-                line(g, x, y + 158, x + 25, y + 158, size); // _ 122 588 , 122 + 25 588
-                line(g, x + 25, y + 158, x + 25, y + 118, size); // | 147 588 , 147 588 -40
-                line(g, x + 25, y + 118, x + 37, y + 158, size); // \ 147 118 , 147 + 12 588
-                line(g, x + 37, y + 158, x + 67, y + 158, size); // _ 159 588 , 189 588
-                line(g, x + 67, y + 158, x + 67, y, size); // | 189 430
-                line(g, x + 67, y, x + 42, y, size); // _
-                line(g, x + 42, y, x + 42, y + 40, size); // |
-                line(g, x + 42, y + 40, x + 30, y, size); // \
-                line(g, x + 30, y, x, y, size); // _
+                int[] xp = { x, x, x + 25, x + 25, x + 37, x + 67, x + 67, x + 42, x + 42, x + 30, x };
+                int[] yp = { y, y + 158, y + 158, y + 118, y + 158, y + 158, y, y, y + 40, y, y };
+                polygon(g, xp, yp, yp.length, size);
 
                 // frame
                 // line(g, x, y, x + 67, y); // top 189 67
@@ -162,23 +147,31 @@ class Assignment1_65050816 extends JPanel {
 
         private void drawBunny(Graphics g, int x, int y, int size) {
                 // body
-                curve(g, new int[] { x, x - 30, x - 30, x }, new int[] { y, y + 30, y + 129, y + 159 }, size);
-                curve(g, new int[] { x, x - 33, x - 33, x }, new int[] { y + 159, y + 159, y + 224, y + 234 }, size);
-                curve(g, new int[] { x, x + 16, x + 87, x + 122 }, new int[] { y + 234, y + 262, y + 264, y + 295 },
+                curve(g, new int[] { x, x - 30, x - 30, x },
+                                new int[] { y, y + 30, y + 129, y + 159 },
+                                size);
+                curve(g, new int[] { x, x - 33, x - 33, x },
+                                new int[] { y + 159, y + 159, y + 224, y + 234 },
+                                size);
+                curve(g, new int[] { x, x + 16, x + 87, x + 122 },
+                                new int[] { y + 234, y + 262, y + 264, y + 295 },
                                 size);
 
                 // left arm
                 curve(g, new int[] { x + 121, x + 45, x + 45, x - 31 },
                                 new int[] { y + 296, y + 344, y + 344, y + 305 },
                                 size);
-                curve(g, new int[] { x - 31, x - 45, x - 45, x - 63 }, new int[] { y + 305, y + 303, y + 303, y + 306 },
+                curve(g, new int[] { x - 31, x - 45, x - 45, x - 63 },
+                                new int[] { y + 305, y + 303, y + 303, y + 306 },
                                 size);
-                curve(g, new int[] { x + 93, x + 21, x - 47, x - 63 }, new int[] { y + 434, y + 443, y + 421, y + 387 },
+                curve(g, new int[] { x + 93, x + 21, x - 47, x - 63 },
+                                new int[] { y + 434, y + 443, y + 421, y + 387 },
                                 size);
 
                 // body cont.
                 curve(g, new int[] { x + 123, x + 82, x + 82, x + 91 },
-                                new int[] { y + 294, y + 344, y + 408, y + 408 }, size);
+                                new int[] { y + 294, y + 344, y + 408, y + 408 },
+                                size);
                 curve(g, new int[] { x + 91, x + 91, x + 202, x + 257 },
                                 new int[] { y + 390, y + 563, y + 563, y + 563 },
                                 size);
@@ -214,7 +207,8 @@ class Assignment1_65050816 extends JPanel {
                                 new int[] { y + 109, y + 117, y + 90, y + 63 },
                                 size);
                 line(g, x + 416, y + 63, x + 423, y + 63, size);
-                curve(g, new int[] { x + 423, x + 403, x + 395, x + 392 }, new int[] { y + 63, y + 47, y + 32, y },
+                curve(g, new int[] { x + 423, x + 403, x + 395, x + 392 },
+                                new int[] { y + 63, y + 47, y + 32, y },
                                 size);
 
                 // left leg
@@ -249,31 +243,42 @@ class Assignment1_65050816 extends JPanel {
                 curve(g, new int[] { x + 74, x + 94, x + 116, x + 126 },
                                 new int[] { y + 198, y + 225, y + 225, y + 197 },
                                 size);
-                curve(g, new int[] { x + 97, x + 97, x + 63, x + 63 }, new int[] { y + 153, y + 147, y + 147, y + 165 },
+                curve(g, new int[] { x + 97, x + 97, x + 63, x + 63 },
+                                new int[] { y + 153, y + 147, y + 147, y + 165 },
                                 size);
-                curve(g, new int[] { x + 97, x + 97, x + 66, x + 63 }, new int[] { y + 153, y + 147, y + 147, y + 165 },
+                curve(g, new int[] { x + 97, x + 97, x + 66, x + 63 },
+                                new int[] { y + 153, y + 147, y + 147, y + 165 },
                                 size);
-                curve(g, new int[] { x + 63, x + 81, x + 97, x + 97 }, new int[] { y + 165, y + 196, y + 165, y + 153 },
+                curve(g, new int[] { x + 63, x + 81, x + 97, x + 97 },
+                                new int[] { y + 165, y + 196, y + 165, y + 153 },
                                 size);
 
                 // left eye
-                curve(g, new int[] { x + 64, x + 49, x + 11, x + 1 }, new int[] { y + 143, y + 92, y + 92, y + 138 },
+                curve(g, new int[] { x + 64, x + 49, x + 11, x + 1 },
+                                new int[] { y + 143, y + 92, y + 92, y + 138 },
                                 size);
-                curve(g, new int[] { x + 1, x + 1, x + 24, x + 45 }, new int[] { y + 138, y + 165, y + 165, y + 165 },
+                curve(g, new int[] { x + 1, x + 1, x + 24, x + 45 },
+                                new int[] { y + 138, y + 165, y + 165, y + 165 },
                                 size);
-                curve(g, new int[] { x + 33, x + 46, x + 42, x + 36 }, new int[] { y + 105, y + 129, y + 135, y + 132 },
+                curve(g, new int[] { x + 33, x + 46, x + 42, x + 36 },
+                                new int[] { y + 105, y + 129, y + 135, y + 132 },
                                 size);
-                curve(g, new int[] { x + 36, x + 48, x + 47, x + 55 }, new int[] { y + 132, y + 138, y + 142, y + 150 },
+                curve(g, new int[] { x + 36, x + 48, x + 47, x + 55 },
+                                new int[] { y + 132, y + 138, y + 142, y + 150 },
                                 size);
-                curve(g, new int[] { x + 15, x + 16, x + 35, x + 20 }, new int[] { y + 130, y + 117, y + 123, y + 150 },
+                curve(g, new int[] { x + 15, x + 16, x + 35, x + 20 },
+                                new int[] { y + 130, y + 117, y + 123, y + 150 },
                                 size);
-                curve(g, new int[] { x + 15, x + 9, x - 3, x + 20 }, new int[] { y + 130, y + 120, y + 133, y + 150 },
+                curve(g, new int[] { x + 15, x + 9, x - 3, x + 20 },
+                                new int[] { y + 130, y + 120, y + 133, y + 150 },
                                 size);
                 line(g, x + 1, y + 130, x - 30, y + 117, size);
                 line(g, x + 3, y + 140, x - 21, y + 139, size);
-                curve(g, new int[] { x - 9, x - 24, x - 47, x - 47 }, new int[] { y + 198, y + 196, y + 198, y + 203 },
+                curve(g, new int[] { x - 9, x - 24, x - 47, x - 47 },
+                                new int[] { y + 198, y + 196, y + 198, y + 203 },
                                 size);
-                curve(g, new int[] { x + 3, x - 22, x - 35, x - 38 }, new int[] { y + 216, y + 220, y + 232, y + 244 },
+                curve(g, new int[] { x + 3, x - 22, x - 35, x - 38 },
+                                new int[] { y + 216, y + 220, y + 232, y + 244 },
                                 size);
 
                 // right eye
@@ -305,10 +310,12 @@ class Assignment1_65050816 extends JPanel {
                                 size);
 
                 // left eyebrow
-                curve(g, new int[] { x + 7, x + 13, x + 31, x + 31 }, new int[] { y + 46, y + 35, y + 35, y + 41 },
+                curve(g, new int[] { x + 7, x + 13, x + 31, x + 31 },
+                                new int[] { y + 46, y + 35, y + 35, y + 41 },
                                 size);
                 // right eyebrow
-                curve(g, new int[] { x + 148, x + 148, x + 181, x + 181 }, new int[] { y + 30, y + 11, y + 11, y + 19 },
+                curve(g, new int[] { x + 148, x + 148, x + 181, x + 181 },
+                                new int[] { y + 30, y + 11, y + 11, y + 19 },
                                 size);
 
                 // chest hair
@@ -326,9 +333,11 @@ class Assignment1_65050816 extends JPanel {
                                 size);
 
                 // line left hand
-                curve(g, new int[] { x - 37, x - 40, x - 34, x - 27 }, new int[] { y + 323, y + 339, y + 347, y + 346 },
+                curve(g, new int[] { x - 37, x - 40, x - 34, x - 27 },
+                                new int[] { y + 323, y + 339, y + 347, y + 346 },
                                 size);
-                curve(g, new int[] { x - 63, x - 62, x - 58, x - 55 }, new int[] { y + 324, y + 329, y + 331, y + 328 },
+                curve(g, new int[] { x - 63, x - 62, x - 58, x - 55 },
+                                new int[] { y + 324, y + 329, y + 331, y + 328 },
                                 size);
 
         }
@@ -376,10 +385,14 @@ class Assignment1_65050816 extends JPanel {
         }
 
         private void polygon(Graphics g, int[] x, int[] y, int n, int size) {
-                g.drawPolygon(new Polygon(x, y, n));
+                for (int i = 0; i < n; i++) {
+                        line(g, x[i], y[i], x[(i + 1) % n], y[(i + 1) % n], size);
+                }
+                // g.drawPolygon(new Polygon(x, y, n));
         }
 
         private void curve(Graphics g, int[] xPoints, int[] yPoints, int size) {
+                // Bezier Curve
                 for (int i = 0; i <= 1000; i++) {
                         double t = i / 1000.0;
                         int x = (int) (Math.pow((1 - t), 3) * xPoints[0] + 3 * t * Math.pow((1 - t), 2) * xPoints[1]
@@ -396,41 +409,6 @@ class Assignment1_65050816 extends JPanel {
         }
 
         public BufferedImage floodFill(BufferedImage m, int x, int y, Color targetColour,
-                        Color replacementColor) {
-                Graphics2D g2 = m.createGraphics();
-                Queue<Point> q = new LinkedList<>();
-                if (m.getRGB(x, y) == targetColour.getRGB()) {
-                        g2.setColor(replacementColor);
-                        plotdot(g2, x, y, 1);
-                        q.add(new Point(x, y));
-                }
-                while (!q.isEmpty()) {
-                        Point p = q.poll();
-                        // s
-                        if (p.y < 600 && m.getRGB(p.x, p.y + 1) == targetColour.getRGB()) {
-                                plotdot(g2, p.x, p.y + 1, 1);
-                                q.add(new Point(p.x, p.y + 1));
-                        }
-                        // n
-                        if (p.y > 0 && m.getRGB(p.x, p.y - 1) == targetColour.getRGB()) {
-                                plotdot(g2, p.x, p.y - 1, 1);
-                                q.add(new Point(p.x, p.y - 1));
-                        }
-                        // e
-                        if (p.x < 600 && m.getRGB(p.x + 1, p.y) == targetColour.getRGB()) {
-                                plotdot(g2, p.x + 1, p.y, 1);
-                                q.add(new Point(p.x + 1, p.y));
-                        }
-                        // w
-                        if (p.x > 0 && m.getRGB(p.x - 1, p.y) == targetColour.getRGB()) {
-                                plotdot(g2, p.x - 1, p.y, 1);
-                                q.add(new Point(p.x - 1, p.y));
-                        }
-                }
-                return m;
-        }
-
-        public BufferedImage floodFill2(BufferedImage m, int x, int y, Color targetColour,
                         Color replacementColor) {
                 Graphics2D g2 = m.createGraphics();
                 Queue<Point> q = new LinkedList<>();
@@ -543,13 +521,12 @@ class Assignment1_65050816 extends JPanel {
         }
 
         private Color interpolateColor(Color startColor, Color endColor, float ratio) {
-                int red = Math.max(0,
-                                Math.min(255, (int) (startColor.getRed() * (1 - ratio) + endColor.getRed() * ratio)));
-                int green = Math.max(0,
-                                Math.min(255, (int) (startColor.getGreen() * (1 - ratio)
-                                                + endColor.getGreen() * ratio)));
-                int blue = Math.max(0,
-                                Math.min(255, (int) (startColor.getBlue() * (1 - ratio) + endColor.getBlue() * ratio)));
+                int red = Math.max(0, Math.min(255, (int) (startColor.getRed() * (1 - ratio) +
+                                endColor.getRed() * ratio)));
+                int green = Math.max(0, Math.min(255, (int) (startColor.getGreen() * (1 - ratio) +
+                                endColor.getGreen() * ratio)));
+                int blue = Math.max(0, Math.min(255, (int) (startColor.getBlue() * (1 - ratio) +
+                                endColor.getBlue() * ratio)));
 
                 return new Color(red, green, blue);
         }
