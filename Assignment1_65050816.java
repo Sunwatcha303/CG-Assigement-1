@@ -14,7 +14,7 @@ class Assignment1_65050816 extends JPanel {
 
                 JFrame f = new JFrame();
                 f.add(m);
-                f.setTitle("Happy_New_Jeans_65050816");
+                f.setTitle("Happy New Jeans 65050816");
                 f.setSize(m.WIDTH, m.HEIGHT);
                 f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
                 f.setVisible(true);
@@ -38,7 +38,7 @@ class Assignment1_65050816 extends JPanel {
                 buffer = floodFill(buffer, 70, 5, frameBunny, areaBunny); // body
                 buffer = floodFill(buffer, 87, 371, frameBunny, areaBunny); // left arm
                 buffer = floodFill(buffer, 199, 561, frameBunny, areaBunny); // left leg
-                buffer = floodFill(buffer, 142, 593, frameBunny, frameBunny); // left boot
+                buffer = floodFill(buffer, 142, 593, frameBunny, frameBunny); // left foot
                 buffer = floodFill(buffer, 592, 453, frameBunny, areaBunny); // tail
                 buffer = floodFill(buffer, 259, 96, frameBunny, areaBunny); // right eye
                 buffer = floodFill(buffer, 243, 116, frameBunny, frameBunny); // right eye
@@ -68,11 +68,10 @@ class Assignment1_65050816 extends JPanel {
                         for (int j = 0; j < WIDTH; j += 4) {
                                 if (buffer.getRGB(i, j) == bg.getRGB()) {
                                         g2.setColor(Color.WHITE);
-                                        plotdot(g2, i, j, 2);
                                 } else {
                                         g2.setColor(bg);
-                                        plotdot(g2, i, j, 2);
                                 }
+                                plotdot(g2, i, j, 2);
                         }
                 }
 
@@ -218,7 +217,7 @@ class Assignment1_65050816 extends JPanel {
                 curve(g, new int[] { x + 257, x + 245, x + 239, x + 228 },
                                 new int[] { y + 563, y + 592, y + 597, y + 600 },
                                 size);
-                // left boot
+                // left foot
                 curve(g, new int[] { x + 113, x + 56, x + 38, x + 35 },
                                 new int[] { y + 569, y + 575, y + 586, y + 600 },
                                 size);
