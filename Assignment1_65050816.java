@@ -14,7 +14,7 @@ class Assignment1_65050816 extends JPanel {
 
                 JFrame f = new JFrame();
                 f.add(m);
-                f.setTitle("Assignment1_Happy_New_Jeans_65050816");
+                f.setTitle("Happy_New_Jeans_65050816");
                 f.setSize(m.WIDTH, m.HEIGHT);
                 f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
                 f.setVisible(true);
