@@ -11,6 +11,6 @@
     <div style="text-align: center;">
       <span>Ref.</span>
     </div>
-    <img src="https://upload.wikimedia.org/wikipedia/en/3/3d/New_Jeans_%28EP%29.jpg" width="300" style="max-width:100%;">
+    <img src="https://i.pinimg.com/originals/2f/f6/67/2ff66716b07c1411d16b987783687044.jpg" width="300" style="max-width:100%;">
   </div>
 </div>
