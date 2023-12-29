@@ -138,8 +138,8 @@ class Assignment1_65050816 extends JPanel {
                 polygon(g, xp, yp, yp.length, size);
 
                 // frame
-                // line(g, x, y, x + 67, y); // top 189 67
-                // line(g, x, y, x, y + 158); // left 158
+                // line(g, x, y, x + 67, y); // top
+                // line(g, x, y, x, y + 158); // left
                 // line(g, x, y + 158, x + 67, y + 158); // bottom
                 // line(g, x + 67, y, x + 67, y + 158); // right
         }
@@ -155,19 +155,6 @@ class Assignment1_65050816 extends JPanel {
                 curve(g, new int[] { x, x + 16, x + 87, x + 122 },
                                 new int[] { y + 234, y + 262, y + 264, y + 295 },
                                 size);
-
-                // left arm
-                curve(g, new int[] { x + 121, x + 45, x + 45, x - 31 },
-                                new int[] { y + 296, y + 344, y + 344, y + 305 },
-                                size);
-                curve(g, new int[] { x - 31, x - 45, x - 45, x - 63 },
-                                new int[] { y + 305, y + 303, y + 303, y + 306 },
-                                size);
-                curve(g, new int[] { x + 93, x + 21, x - 47, x - 63 },
-                                new int[] { y + 434, y + 443, y + 421, y + 387 },
-                                size);
-
-                // body cont.
                 curve(g, new int[] { x + 123, x + 82, x + 82, x + 91 },
                                 new int[] { y + 294, y + 344, y + 408, y + 408 },
                                 size);
@@ -177,7 +164,6 @@ class Assignment1_65050816 extends JPanel {
                 curve(g, new int[] { x + 280, x + 252, x + 252, x + 256 },
                                 new int[] { y + 537, y + 547, y + 600, y + 600 },
                                 size);
-
                 curve(g, new int[] { x + 471, x + 508, x + 508, x + 471 },
                                 new int[] { y + 600, y + 550, y + 437, y + 419 },
                                 size);
@@ -210,6 +196,17 @@ class Assignment1_65050816 extends JPanel {
                                 new int[] { y + 63, y + 47, y + 32, y },
                                 size);
 
+                // left arm
+                curve(g, new int[] { x + 121, x + 45, x + 45, x - 31 },
+                                new int[] { y + 296, y + 344, y + 344, y + 305 },
+                                size);
+                curve(g, new int[] { x - 31, x - 45, x - 45, x - 63 },
+                                new int[] { y + 305, y + 303, y + 303, y + 306 },
+                                size);
+                curve(g, new int[] { x + 93, x + 21, x - 47, x - 63 },
+                                new int[] { y + 434, y + 443, y + 421, y + 387 },
+                                size);
+
                 // left leg
                 curve(g, new int[] { x + 134, x + 109, x + 109, x + 115 },
                                 new int[] { y + 526, y + 536, y + 600, y + 600 },
@@ -217,6 +214,7 @@ class Assignment1_65050816 extends JPanel {
                 curve(g, new int[] { x + 257, x + 245, x + 239, x + 228 },
                                 new int[] { y + 563, y + 592, y + 597, y + 600 },
                                 size);
+
                 // left foot
                 curve(g, new int[] { x + 113, x + 56, x + 38, x + 35 },
                                 new int[] { y + 569, y + 575, y + 586, y + 600 },
@@ -452,7 +450,7 @@ class Assignment1_65050816 extends JPanel {
         }
 
         private BufferedImage floodFillGradient(BufferedImage m, int xStart, int yStart, int xEnd, int yEnd,
-                        Color startColor, Color endColor, Color target) {
+                        Color startColor, Color endColor, Color border) {
                 Graphics2D g2 = m.createGraphics();
                 Queue<Point> q = new LinkedList<>();
 
@@ -462,7 +460,7 @@ class Assignment1_65050816 extends JPanel {
                 Color lineColor1 = interpolateColor(startColor, endColor, ratio);
                 Color lineColor2 = interpolateColor(startColor, endColor, ratio);
 
-                if (m.getRGB(xStart, yStart) != target.getRGB()) {
+                if (m.getRGB(xStart, yStart) != border.getRGB()) {
                         g2.setColor(lineColor);
                         plotdot(g2, xStart, yStart, 1);
                         q.add(new Point(xStart, yStart));
@@ -483,7 +481,7 @@ class Assignment1_65050816 extends JPanel {
                         lineColor2 = interpolateColor(startColor, endColor, ratio);
 
                         // s
-                        if (p.y + 1 < 600 && (m.getRGB(p.x, p.y + 1) != target.getRGB())) {
+                        if (p.y + 1 < 600 && (m.getRGB(p.x, p.y + 1) != border.getRGB())) {
                                 if (m.getRGB(p.x, p.y + 1) != lineColor2.getRGB()) {
                                         g2.setColor(lineColor2);
                                         plotdot(g2, p.x, p.y + 1, 1);
@@ -491,7 +489,7 @@ class Assignment1_65050816 extends JPanel {
                                 }
                         }
                         // n
-                        if (p.y - 1 > 0 && (m.getRGB(p.x, p.y - 1) != target.getRGB())) {
+                        if (p.y - 1 > 0 && (m.getRGB(p.x, p.y - 1) != border.getRGB())) {
                                 if (m.getRGB(p.x, p.y - 1) != lineColor1.getRGB()) {
                                         g2.setColor(lineColor1);
                                         plotdot(g2, p.x, p.y - 1, 1);
@@ -499,7 +497,7 @@ class Assignment1_65050816 extends JPanel {
                                 }
                         }
                         // e
-                        if (p.x + 1 < 600 && (m.getRGB(p.x + 1, p.y) != target.getRGB())) {
+                        if (p.x + 1 < 600 && (m.getRGB(p.x + 1, p.y) != border.getRGB())) {
                                 if (m.getRGB(p.x + 1, p.y) != lineColor.getRGB()) {
                                         g2.setColor(lineColor);
                                         plotdot(g2, p.x + 1, p.y, 1);
@@ -507,7 +505,7 @@ class Assignment1_65050816 extends JPanel {
                                 }
                         }
                         // w
-                        if (p.x - 1 > 0 && (m.getRGB(p.x - 1, p.y) != target.getRGB())) {
+                        if (p.x - 1 > 0 && (m.getRGB(p.x - 1, p.y) != border.getRGB())) {
                                 if (m.getRGB(p.x - 1, p.y) != lineColor.getRGB()) {
                                         g2.setColor(lineColor);
                                         plotdot(g2, p.x - 1, p.y, 1);
