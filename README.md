@@ -4,7 +4,7 @@
     <div style="text-align: center;">
       <span>My Work</span>
     </div>
-    <img src="https://github.com/Sunwatcha303/CG-Assigement-1/blob/main/output-latest.png?raw=true" alt="Your Image" width="300" style="max-width:100%;">
+    <img src="https://github.com/Sunwatcha303/CG-Assigement-1/blob/main/Assignment1_65050816.png?raw=true" alt="Your Image" width="300" style="max-width:100%;">
   </div>
 
   <div>
